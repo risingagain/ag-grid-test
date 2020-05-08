@@ -1,0 +1,5 @@
+.ag-theme-alpine .ag-checkbox-input-wrapper.ag-indeterminate {
+    &::after {
+        content: "\f108";
+    }
+}
