@@ -4,6 +4,15 @@ import { ImageFormatterComponent } from "./image-formatter/image-formatter.compo
 import { UrlFormatterComponent } from "./url-formatter/url-formatter.component";
 import { AgGridAngular } from 'ag-grid-angular';
 
+export interface Video {
+  etag: string;
+  items: Array < {} >;
+  kind: string;
+  nextPageToken: string;
+  pageInfo: { resultsPerPage: number, totalResults: number };
+  regionCode: string;
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,8 +50,9 @@ export class AppComponent {
   rowData = [];
 
   constructor(private videoService: VideoService) {
-    videoService.fetchVideos().subscribe((data) => {
-      this.videos = data.items;
+    videoService.fetchVideos().subscribe((data: Video) => {
+      console.log(data);
+      this.videos = data.items;      
       this.count = this.videos.length;
       this.videos.map((video) => {
         this.rowData = [...this.rowData, { thumbnail: video.snippet.thumbnails.default, publishedAt: video.snippet.publishedAt, title: { title: video.snippet.title, href: "https://www.youtube.com/watch?v=" + video.id.videoId }, description: video.snippet.description }];
