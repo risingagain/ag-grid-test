@@ -51,7 +51,6 @@ export class AppComponent {
 
   constructor(private videoService: VideoService) {
     videoService.fetchVideos().subscribe((data: Video) => {
-      console.log(data);
       this.videos = data.items;      
       this.count = this.videos.length;
       this.videos.map((video) => {
